@@ -19,5 +19,47 @@
       }
     },
     "estado": "completado"
+  },
+  {
+    "id": "cierre-1785871091709-793",
+    "ventasTotales": 23900,
+    "ordenesProcesadas": 3,
+    "fecha": "2026-08-04T19:18:11.706Z",
+    "detalleCanales": {
+      "mostrador": {
+        "monto": 12500,
+        "porcentaje": 52
+      },
+      "express": {
+        "monto": 3800,
+        "porcentaje": 16
+      },
+      "auto": {
+        "monto": 7600,
+        "porcentaje": 32
+      }
+    },
+    "estado": "completado"
+  },
+  {
+    "id": "cierre-1785873003337-660",
+    "ventasTotales": 59550,
+    "ordenesProcesadas": 7,
+    "fecha": "2026-08-04T19:49:48.011Z",
+    "detalleCanales": {
+      "mostrador": {
+        "monto": 12500,
+        "porcentaje": 21
+      },
+      "express": {
+        "monto": 28269,
+        "porcentaje": 47
+      },
+      "auto": {
+        "monto": 18781,
+        "porcentaje": 32
+      }
+    },
+    "estado": "completado"
   }
 ]

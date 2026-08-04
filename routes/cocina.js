@@ -1,6 +1,11 @@
 const express = require('express');
 const db = require('../db');
 
+function calcularMontoAprox(ticket) {
+    const items = ticket.items || [];
+    return items.length * 4200 + Math.floor(Math.random() * 3000);
+}
+
 module.exports = function (io) {
     const router = express.Router();
 
@@ -54,6 +59,20 @@ module.exports = function (io) {
                 entregadoEn: new Date().toISOString()
             });
             db.escribirColeccion('historial_cocina', historial);
+
+            // Registrar venta al despachar
+            const montoVenta = calcularMontoAprox(ticket);
+
+            const ventas = db.leerColeccion('ventas');
+            ventas.push({
+                id: db.generarId('v'),
+                monto: montoVenta,
+                canal: ['mostrador', 'express', 'auto'][Math.floor(Math.random() * 3)],
+                fecha: new Date().toISOString()
+            });
+            db.escribirColeccion('ventas', ventas);
+
+            io.emit('cambio_reportes', { tipo: 'nueva_venta' });
 
             io.emit('ticket_despachado', { idOrden: req.params.id });
         }

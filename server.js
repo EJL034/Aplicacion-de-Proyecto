@@ -43,3 +43,38 @@ io.on('connection', (socket) => {
 server.listen(PORT, () => {
     console.log(`🐔 Pollerya Manager corriendo en http://localhost:${PORT}`);
 });
+
+// ---------------------------------------------------------------
+// SIMULADOR: genera un ticket de cocina cada 60 segundos
+// ---------------------------------------------------------------
+const db = require('./db');
+
+const ejemplosPedidos = [
+    ['2x Pollo Grande (Frito)', '1x Porción Patacones'],
+    ['1x Combo Familiar (8 pzs)', '2x Bebida Grande'],
+    ['3x Alitas Búfalo', '1x Papas Supremas'],
+    ['1x Pollo Crispy Personal', '1x Refresco'],
+    ['2x Combo Personal + Papas'],
+    ['1x Pollo Familiar', '1x Extra Salsa']
+];
+
+setInterval(() => {
+    const tickets = db.leerColeccion('tickets_cocina');
+
+    // No generar si ya hay muchos tickets pendientes
+    if (tickets.length >= 8) return;
+
+    const nuevoTicket = {
+        id: String(100 + Math.floor(Math.random() * 900)),
+        items: ejemplosPedidos[Math.floor(Math.random() * ejemplosPedidos.length)],
+        tiempo: Math.floor(Math.random() * 4) + 1,
+        estado: 'espera'
+    };
+
+    tickets.push(nuevoTicket);
+    db.escribirColeccion('tickets_cocina', tickets);
+
+    io.emit('cambio_cocina', { tipo: 'nuevo_ticket', ticket: nuevoTicket });
+
+    console.log(`🍗 Nuevo pedido simulado: #${nuevoTicket.id}`);
+}, 60 * 1000); // cada 60 segundos

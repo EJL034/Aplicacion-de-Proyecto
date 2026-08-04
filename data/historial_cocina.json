@@ -15,5 +15,49 @@
     ],
     "tiempoTotal": 2,
     "entregadoEn": "2026-08-01T17:00:44.942Z"
+  },
+  {
+    "id": "106",
+    "items": [
+      "3x Combo Personal Pieza / Papa"
+    ],
+    "tiempoTotal": 1,
+    "entregadoEn": "2026-08-04T19:48:17.084Z"
+  },
+  {
+    "id": "199",
+    "items": [
+      "1x Pollo Crispy Personal",
+      "1x Refresco"
+    ],
+    "tiempoTotal": 2,
+    "entregadoEn": "2026-08-04T19:48:30.241Z"
+  },
+  {
+    "id": "537",
+    "items": [
+      "1x Pollo Crispy Personal",
+      "1x Refresco"
+    ],
+    "tiempoTotal": 2,
+    "entregadoEn": "2026-08-04T19:48:49.695Z"
+  },
+  {
+    "id": "841",
+    "items": [
+      "1x Pollo Crispy Personal",
+      "1x Refresco"
+    ],
+    "tiempoTotal": 2,
+    "entregadoEn": "2026-08-04T19:49:53.182Z"
+  },
+  {
+    "id": "554",
+    "items": [
+      "1x Combo Familiar (8 pzs)",
+      "2x Bebida Grande"
+    ],
+    "tiempoTotal": 3,
+    "entregadoEn": "2026-08-04T19:51:52.516Z"
   }
 ]

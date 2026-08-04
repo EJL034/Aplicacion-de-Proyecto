@@ -4,16 +4,16 @@
     "nombre": "Freidora Automática P1",
     "tipo": "Cocción Básica",
     "ultimaRevision": "2026-08-01",
-    "detalles": "Limpieza y ajuste menor realizado",
-    "estado": "optimo"
+    "detalles": "El estado del equipo empeoró en operación",
+    "estado": "critico"
   },
   {
     "id": "eq-02",
     "nombre": "Mantenedor de Calor Industrial",
     "tipo": "Exhibición / Servicio",
     "ultimaRevision": "2026-08-01",
-    "detalles": "Mantenimiento preventivo y reparación completada",
-    "estado": "optimo"
+    "detalles": "toma corrientes ",
+    "estado": "moderado"
   },
   {
     "id": "eq-03",
@@ -36,7 +36,15 @@
     "nombre": "Sarten",
     "tipo": "Basico",
     "ultimaRevision": "2026-08-01",
-    "detalles": "viejo",
-    "estado": "optimo"
+    "detalles": " mango suelto ",
+    "estado": "moderado"
+  },
+  {
+    "id": "eq-1785871182738-853",
+    "nombre": "Sarten",
+    "tipo": "coccion",
+    "ultimaRevision": "2026-08-04",
+    "detalles": "El estado del equipo empeoró en operación",
+    "estado": "critico"
   }
 ]
