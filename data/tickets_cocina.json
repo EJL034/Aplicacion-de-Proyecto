@@ -1,30 +1,12 @@
 [
   {
-    "id": "107",
-    "items": [
-      "1x Combo Familiar (8 pzs)",
-      "2x Bebida Grande"
-    ],
-    "tiempo": 1,
-    "estado": "proceso"
-  },
-  {
-    "id": "254",
-    "items": [
-      "2x Pollo Grande (Frito)",
-      "1x Porción Patacones"
-    ],
-    "tiempo": 1,
-    "estado": "proceso"
-  },
-  {
     "id": "437",
     "items": [
       "1x Pollo Crispy Personal",
       "1x Refresco"
     ],
     "tiempo": 2,
-    "estado": "espera"
+    "estado": "listo"
   },
   {
     "id": "180",
@@ -33,7 +15,7 @@
       "1x Extra Salsa"
     ],
     "tiempo": 2,
-    "estado": "espera"
+    "estado": "proceso"
   },
   {
     "id": "931",
@@ -42,6 +24,42 @@
       "1x Refresco"
     ],
     "tiempo": 1,
+    "estado": "proceso"
+  },
+  {
+    "id": "394",
+    "items": [
+      "1x Pollo Crispy Personal",
+      "1x Refresco"
+    ],
+    "tiempo": 1,
+    "estado": "listo"
+  },
+  {
+    "id": "847",
+    "items": [
+      "1x Pollo Crispy Personal",
+      "1x Refresco"
+    ],
+    "tiempo": 4,
+    "estado": "proceso"
+  },
+  {
+    "id": "131",
+    "items": [
+      "1x Pollo Familiar",
+      "1x Extra Salsa"
+    ],
+    "tiempo": 3,
+    "estado": "proceso"
+  },
+  {
+    "id": "230",
+    "items": [
+      "2x Pollo Grande (Frito)",
+      "1x Porción Patacones"
+    ],
+    "tiempo": 4,
     "estado": "espera"
   }
 ]

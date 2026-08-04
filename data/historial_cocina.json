@@ -59,5 +59,23 @@
     ],
     "tiempoTotal": 3,
     "entregadoEn": "2026-08-04T19:51:52.516Z"
+  },
+  {
+    "id": "107",
+    "items": [
+      "1x Combo Familiar (8 pzs)",
+      "2x Bebida Grande"
+    ],
+    "tiempoTotal": 1,
+    "entregadoEn": "2026-08-04T21:24:55.653Z"
+  },
+  {
+    "id": "254",
+    "items": [
+      "2x Pollo Grande (Frito)",
+      "1x Porción Patacones"
+    ],
+    "tiempoTotal": 1,
+    "entregadoEn": "2026-08-04T21:24:56.258Z"
   }
 ]

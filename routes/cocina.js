@@ -3,7 +3,8 @@ const db = require('../db');
 
 function calcularMontoAprox(ticket) {
     const items = ticket.items || [];
-    return items.length * 4200 + Math.floor(Math.random() * 3000);
+    // Estimación: cada item ~ ₡4200 + un poco de variación
+    return items.length * 4200 + Math.floor(Math.random() * 2500);
 }
 
 module.exports = function (io) {
@@ -48,9 +49,11 @@ module.exports = function (io) {
         const existia = Boolean(ticket);
 
         if (existia) {
+            // 1. Quitar de la lista activa
             tickets = tickets.filter(t => String(t.id) !== String(req.params.id));
             db.escribirColeccion('tickets_cocina', tickets);
 
+            // 2. Guardar en historial
             const historial = db.leerColeccion('historial_cocina');
             historial.push({
                 id: ticket.id,
@@ -60,21 +63,21 @@ module.exports = function (io) {
             });
             db.escribirColeccion('historial_cocina', historial);
 
-            // Registrar venta al despachar
+            // 3. REGISTRAR VENTA (esto hace que suban las ganancias)
             const montoVenta = calcularMontoAprox(ticket);
-
+            const canales = ['mostrador', 'express', 'auto'];
             const ventas = db.leerColeccion('ventas');
             ventas.push({
                 id: db.generarId('v'),
                 monto: montoVenta,
-                canal: ['mostrador', 'express', 'auto'][Math.floor(Math.random() * 3)],
+                canal: canales[Math.floor(Math.random() * canales.length)],
                 fecha: new Date().toISOString()
             });
             db.escribirColeccion('ventas', ventas);
 
-            io.emit('cambio_reportes', { tipo: 'nueva_venta' });
-
+            // 4. Avisar a todas las pantallas
             io.emit('ticket_despachado', { idOrden: req.params.id });
+            io.emit('cambio_reportes', { tipo: 'nueva_venta' });
         }
 
         res.json({ status: 'success', registrado: existia });

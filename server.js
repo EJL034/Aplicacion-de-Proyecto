@@ -55,25 +55,28 @@ const ejemplosPedidos = [
     ['3x Alitas Búfalo', '1x Papas Supremas'],
     ['1x Pollo Crispy Personal', '1x Refresco'],
     ['2x Combo Personal + Papas'],
-    ['1x Pollo Familiar', '1x Extra Salsa']
+    ['1x Pollo Familiar', '1x Extra Salsa'],
+    ['2x Combo Alitas', '1x Bebida Gigante'],
+    ['1x Pollo Grande Crispy', '1x Porción Papas']
 ];
 
 setInterval(() => {
     const tickets = db.leerColeccion('tickets_cocina');
 
-    // No generar si ya hay muchos tickets pendientes
+    // No saturar: máximo 8 tickets en espera/proceso
     if (tickets.length >= 8) return;
 
     const nuevoTicket = {
         id: String(100 + Math.floor(Math.random() * 900)),
         items: ejemplosPedidos[Math.floor(Math.random() * ejemplosPedidos.length)],
-        tiempo: Math.floor(Math.random() * 4) + 1,
+        tiempo: Math.floor(Math.random() * 4) + 1, // 1 a 4 min
         estado: 'espera'
     };
 
     tickets.push(nuevoTicket);
     db.escribirColeccion('tickets_cocina', tickets);
 
+    // Avisar a las pantallas de cocina en tiempo real
     io.emit('cambio_cocina', { tipo: 'nuevo_ticket', ticket: nuevoTicket });
 
     console.log(`🍗 Nuevo pedido simulado: #${nuevoTicket.id}`);
