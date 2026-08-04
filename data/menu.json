@@ -1,0 +1,50 @@
+[
+  {
+    "id": "prod-01",
+    "nombre": "Combo Familiar (8 Piezas)",
+    "categoria": "Combos",
+    "precio": 12500,
+    "icono": "🍗",
+    "estado": "activo"
+  },
+  {
+    "id": "prod-02",
+    "nombre": "Combo Personal + Papas",
+    "categoria": "Combos",
+    "precio": 3800,
+    "icono": "🍟",
+    "estado": "activo"
+  },
+  {
+    "id": "prod-03",
+    "nombre": "Pieza de Pechuga Suelta",
+    "categoria": "Piezas sueltas",
+    "precio": 900,
+    "icono": "🍗",
+    "estado": "activo"
+  },
+  {
+    "id": "prod-04",
+    "nombre": "Porción Extra de Patacones",
+    "categoria": "Acompañamientos",
+    "precio": 1500,
+    "icono": "🍌",
+    "estado": "suspendido"
+  },
+  {
+    "id": "prod-05",
+    "nombre": "Refresco Grande 32oz",
+    "categoria": "Bebidas",
+    "precio": 1200,
+    "icono": "🥤",
+    "estado": "activo"
+  },
+  {
+    "id": "prod-1785556734809-531",
+    "nombre": "Comobo sayayin",
+    "categoria": "Combos",
+    "precio": 2800,
+    "icono": "👌",
+    "estado": "activo"
+  }
+]

@@ -1,0 +1,51 @@
+[
+  {
+    "id": "inv-01",
+    "nombre": "Pollo Entero Limpio",
+    "categoria": "Carnes y Proteínas",
+    "actual": 12,
+    "minimo": 30,
+    "unidad": "unds",
+    "estado": "critico",
+    "consumidoHoy": 3
+  },
+  {
+    "id": "inv-02",
+    "nombre": "Aceite de Freír Premium",
+    "categoria": "Abarrotes / Líquidos",
+    "actual": 40,
+    "minimo": 50,
+    "unidad": "Litros",
+    "estado": "moderado",
+    "consumidoHoy": 0
+  },
+  {
+    "id": "inv-03",
+    "nombre": "Papas Prefritas Corte Fino",
+    "categoria": "Congelados",
+    "actual": 50,
+    "minimo": 80,
+    "unidad": "Kg",
+    "estado": "moderado",
+    "consumidoHoy": 0
+  },
+  {
+    "id": "inv-04",
+    "nombre": "Harina Aliñada Receta Secreta",
+    "categoria": "Secos / Especias",
+    "actual": 60,
+    "minimo": 40,
+    "unidad": "Kg",
+    "estado": "optimo",
+    "consumidoHoy": 0
+  },
+  {
+    "id": "inv-1785556329373-251",
+    "nombre": "Salsa Bufalo",
+    "categoria": "Salsas",
+    "actual": 22,
+    "minimo": 34,
+    "unidad": "kg",
+    "estado": "moderado"
+  }
+]

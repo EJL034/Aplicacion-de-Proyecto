@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pollerya Manager - Gestión de Menú</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f6f9; }
+        .bg-sidebar { background-color: #111e38; }
+        .bg-active-menu { background-color: #4a3e2e; color: #f4ca74; }
+        .menu-item:hover { background-color: rgba(255, 255, 255, 0.05); color: #ffffff; }
+        .card-shadow { box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-[#eef1f6]">
+
+    <aside class="w-64 bg-sidebar flex flex-col h-full text-gray-400 select-none px-4 py-6 shadow-xl shrink-0">
+        <div class="flex items-center gap-3 px-2 mb-8">
+            <div class="text-[#f4ca74] text-3xl"><i class="fa-solid fa-kiwi-bird rotate-180"></i></div>
+            <div class="flex flex-col">
+                <span class="text-white font-bold tracking-wide text-base uppercase">POLLERYA</span>
+                <span class="text-gray-400 text-xs font-medium -mt-1">Manager</span>
+            </div>
+        </div>
+
+        <nav id="sidebar-nav" class="flex-1 space-y-1.5">
+            <a href="index.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-house text-lg w-5 text-center"></i> <span>Inicio</span>
+            </a>
+            <a href="personal.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-users text-lg w-5 text-center"></i> <span>Personal</span>
+            </a>
+            <a href="cocina.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-utensils text-lg w-5 text-center"></i> <span>Cocina</span>
+            </a>
+            <a href="inventario.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-box-open text-lg w-5 text-center"></i> <span>Inventario</span>
+            </a>
+            <a href="equipos.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-screwdriver-wrench text-lg w-5 text-center"></i> <span>Equipos</span>
+            </a>
+            <a href="reportes.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-chart-line text-lg w-5 text-center"></i> <span>Reportes</span>
+            </a>
+            <a href="menu.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-book-open text-lg w-5 text-center"></i> <span>Menú Tienda</span>
+            </a>
+            <a href="configuracion.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-gear text-lg w-5 text-center"></i> <span>Configuración</span>
+            </a>
+        </nav>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full overflow-hidden">
+        <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center shrink-0">
+            <h1 class="text-xl font-bold text-gray-800 tracking-tight">Restaurante Central</h1>
+            <div class="flex items-center gap-2 text-gray-500 font-semibold text-xs bg-gray-100 px-3 py-1.5 rounded-full">
+                <i class="fa-solid fa-utensils text-amber-500"></i> Catálogo Activo
+            </div>
+        </header>
+
+        <div class="flex-1 flex overflow-hidden">
+            
+            <div class="w-80 bg-white border-r border-gray-200 p-6 flex flex-col justify-between overflow-y-auto shrink-0">
+                <div class="space-y-4">
+                    <h3 class="font-bold text-sm text-gray-700 uppercase tracking-wider border-b border-gray-100 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle text-blue-600"></i> Nuevo Producto
+                    </h3>
+                    
+                    <div>
+                        <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Nombre del Ítem</label>
+                        <input type="text" id="menu-nombre" placeholder="Ej. Combo Alitas" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 text-xs font-medium focus:outline-none focus:border-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Categoría</label>
+                        <select id="menu-categoria" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 text-xs font-medium focus:outline-none focus:border-blue-500">
+                            <option value="Combos">Combos Familiares / Personales</option>
+                            <option value="Piezas sueltas">Piezas de Pollo Sueltas</option>
+                            <option value="Acompañamientos">Acompañamientos (Papas, Patacones, etc.)</option>
+                            <option value="Bebidas">Bebidas y Refrescos</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Precio (₡ Colones)</label>
+                        <input type="number" id="menu-precio" placeholder="Ej. 3500" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 text-xs font-medium focus:outline-none focus:border-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Ícono / Emoji descriptivo</label>
+                        <input type="text" id="menu-icono" placeholder="Ej. 🍗, 🍟, 🥤" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 text-xs font-medium focus:outline-none focus:border-blue-500 text-center text-lg">
+                    </div>
+                </div>
+
+                <button onclick="agregarNuevoProducto()" class="w-full mt-6 bg-[#111e38] text-[#f4ca74] py-2.5 rounded-lg text-xs font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-sm">
+                    <i class="fa-solid fa-square-plus"></i> Guardar en Menú
+                </button>
+            </div>
+
+            <div class="flex-1 flex flex-col bg-[#eef1f6] overflow-y-auto p-8">
+                <div class="pb-4 flex justify-between items-center">
+                    <div>
+                        <p class="text-xs font-semibold text-gray-500 tracking-wider uppercase">Inicio > Menú</p>
+                        <h2 class="text-2xl font-bold text-gray-800 mt-0.5">Productos en Exhibición</h2>
+                    </div>
+                    <div class="text-xs font-bold text-gray-500">
+                        Total ítems: <span id="contador-productos" class="bg-white px-2.5 py-1 rounded-full border border-gray-200 text-gray-800 ml-1">0</span>
+                    </div>
+                </div>
+
+                <div id="grid-menu-productos" class="grid grid-cols-3 gap-6 mt-2">
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+    <script src="menu.js"></script>
+</body>
+</html>

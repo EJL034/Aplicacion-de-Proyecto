@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pollerya Manager - Control de Equipos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f6f9; }
+        .bg-sidebar { background-color: #111e38; }
+        .bg-active-menu { background-color: #4a3e2e; color: #f4ca74; }
+        .menu-item:hover { background-color: rgba(255, 255, 255, 0.05); color: #ffffff; }
+        .card-shadow { box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-[#eef1f6]">
+
+    <!-- SIDEBAR LATERAL -->
+    <aside class="w-64 bg-sidebar flex flex-col h-full text-gray-400 select-none px-4 py-6 shadow-xl shrink-0">
+        <div class="flex items-center gap-3 px-2 mb-8">
+            <div class="text-[#f4ca74] text-3xl"><i class="fa-solid fa-kiwi-bird rotate-180"></i></div>
+            <div class="flex flex-col">
+                <span class="text-white font-bold tracking-wide text-base uppercase">POLLERYA</span>
+                <span class="text-gray-400 text-xs font-medium -mt-1">Manager</span>
+            </div>
+        </div>
+
+        <nav id="sidebar-nav" class="flex-1 space-y-1.5">
+            <a href="index.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-house text-lg w-5 text-center"></i> <span>Inicio</span>
+            </a>
+            <a href="personal.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-users text-lg w-5 text-center"></i> <span>Personal</span>
+            </a>
+            <a href="cocina.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-utensils text-lg w-5 text-center"></i> <span>Cocina</span>
+            </a>
+            <a href="inventario.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-box-open text-lg w-5 text-center"></i> <span>Inventario</span>
+            </a>
+            <a href="equipos.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-screwdriver-wrench text-lg w-5 text-center"></i> <span>Equipos</span>
+            </a>
+            <a href="reportes.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-chart-line text-lg w-5 text-center"></i> <span>Reportes</span>
+            </a>
+            <a href="menu.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-book-open text-lg w-5 text-center"></i> <span>Menú Tienda</span>
+            </a>
+            <a href="configuracion.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-gear text-lg w-5 text-center"></i> <span>Configuración</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="flex-1 flex flex-col h-full overflow-y-auto">
+        <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center shrink-0">
+            <h1 class="text-xl font-bold text-gray-800 tracking-tight">Restaurante Central</h1>
+            <div class="flex items-center gap-2 text-gray-500 font-semibold text-xs bg-gray-100 px-3 py-1.5 rounded-full">
+                <i class="fa-solid fa-temperature-high text-blue-500"></i> Monitoreo de Maquinaria
+            </div>
+        </header>
+
+        <div class="px-8 pt-6 pb-2 flex justify-between items-end shrink-0">
+            <div>
+                <p class="text-xs font-semibold text-gray-500 tracking-wider uppercase">Inicio > Equipos</p>
+                <h2 class="text-2xl font-bold text-gray-800 mt-0.5">Estado de Maquinaria y Activos</h2>
+            </div>
+            <button onclick="abrirModalEquipo()" class="bg-[#111e38] text-[#f4ca74] px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-2 hover:opacity-90 transition-opacity">
+                <i class="fa-solid fa-plus"></i> Añadir Equipo
+            </button>
+        </div>
+
+        <!-- TABLERO DE EQUIPOS -->
+        <main class="p-8 grid grid-cols-3 gap-6 flex-1 overflow-hidden h-[calc(100vh-140px)]">
+            
+            <!-- COLUMNA: FUERA DE SERVICIO -->
+            <div class="flex flex-col bg-gray-100 rounded-xl p-4 border border-gray-200/60 overflow-y-auto">
+                <div class="flex justify-between items-center mb-4 pb-2 border-b border-gray-200">
+                    <h3 class="font-bold text-gray-700 uppercase tracking-wider text-xs flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span> Fuera de Servicio
+                    </h3>
+                    <span id="badge-critico" class="bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-xs font-bold">0</span>
+                </div>
+                <div id="col-critico" class="space-y-4"></div>
+            </div>
+
+            <!-- COLUMNA: REQUIERE REVISIÓN -->
+            <div class="flex flex-col bg-gray-100 rounded-xl p-4 border border-gray-200/60 overflow-y-auto">
+                <div class="flex justify-between items-center mb-4 pb-2 border-b border-gray-200">
+                    <h3 class="font-bold text-gray-700 uppercase tracking-wider text-xs flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Requiere Revisión
+                    </h3>
+                    <span id="badge-moderado" class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full text-xs font-bold">0</span>
+                </div>
+                <div id="col-moderado" class="space-y-4"></div>
+            </div>
+
+            <!-- COLUMNA: OPERATIVO -->
+            <div class="flex flex-col bg-gray-100 rounded-xl p-4 border border-gray-200/60 overflow-y-auto">
+                <div class="flex justify-between items-center mb-4 pb-2 border-b border-gray-200">
+                    <h3 class="font-bold text-gray-700 uppercase tracking-wider text-xs flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span> Operativo
+                    </h3>
+                    <span id="badge-optimo" class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-bold">0</span>
+                </div>
+                <div id="col-optimo" class="space-y-4"></div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- MODAL: AÑADIR EQUIPO -->
+    <div id="modal-equipo" class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+                <h3 class="font-bold text-gray-800">Registrar Nuevo Equipo</h3>
+                <button onclick="cerrarModalEquipo()" class="text-gray-400 hover:text-gray-700"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="form-equipo" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Nombre del Equipo</label>
+                    <input type="text" id="equipo-nombre" required placeholder="Ej. Freidora Automática P3" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 text-sm focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Tipo / Categoría</label>
+                    <input type="text" id="equipo-tipo" placeholder="Ej. Cocción Básica" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 text-sm focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Detalle / Nota inicial</label>
+                    <input type="text" id="equipo-detalles" placeholder="Ej. Equipo recién instalado" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 text-sm focus:outline-none focus:border-blue-500">
+                </div>
+                <button type="submit" class="w-full bg-[#111e38] text-[#f4ca74] py-2.5 rounded-lg text-xs font-bold hover:opacity-90 transition-opacity">
+                    <i class="fa-solid fa-square-plus mr-1"></i> Guardar Equipo
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE LOGICA -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+    <script src="equipos.js"></script>
+</body>
+</html>

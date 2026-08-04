@@ -1,0 +1,42 @@
+[
+  {
+    "id": "eq-01",
+    "nombre": "Freidora Automática P1",
+    "tipo": "Cocción Básica",
+    "ultimaRevision": "2026-08-01",
+    "detalles": "Limpieza y ajuste menor realizado",
+    "estado": "optimo"
+  },
+  {
+    "id": "eq-02",
+    "nombre": "Mantenedor de Calor Industrial",
+    "tipo": "Exhibición / Servicio",
+    "ultimaRevision": "2026-08-01",
+    "detalles": "Mantenimiento preventivo y reparación completada",
+    "estado": "optimo"
+  },
+  {
+    "id": "eq-03",
+    "nombre": "Cámara Frigorífica Principal",
+    "tipo": "Conservación",
+    "ultimaRevision": "2026-08-01",
+    "detalles": "Mantenimiento preventivo y reparación completada",
+    "estado": "optimo"
+  },
+  {
+    "id": "eq-04",
+    "nombre": "Freidora de Alta Presión P2",
+    "tipo": "Cocción Rápida",
+    "ultimaRevision": "2026-05-28",
+    "detalles": "Empaques nuevos en tapa",
+    "estado": "optimo"
+  },
+  {
+    "id": "eq-1785556362540-42",
+    "nombre": "Sarten",
+    "tipo": "Basico",
+    "ultimaRevision": "2026-08-01",
+    "detalles": "viejo",
+    "estado": "optimo"
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "asis-1785556281654-720",
+    "id_personal": 3,
+    "nombre": "Anthony Grant",
+    "fecha": "2026-08-01",
+    "hora": "21:51",
+    "tipo": "entrada"
+  },
+  {
+    "id": "asis-1785556283433-844",
+    "id_personal": 2,
+    "nombre": "Valeria Chaves",
+    "fecha": "2026-08-01",
+    "hora": "21:51",
+    "tipo": "salida"
+  },
+  {
+    "id": "asis-1785556284110-484",
+    "id_personal": 1,
+    "nombre": "Emanuel López",
+    "fecha": "2026-08-01",
+    "hora": "21:51",
+    "tipo": "salida"
+  },
+  {
+    "id": "asis-1785556285556-76",
+    "id_personal": 6,
+    "nombre": "Carlos Solano",
+    "fecha": "2026-08-01",
+    "hora": "21:51",
+    "tipo": "salida"
+  }
+]

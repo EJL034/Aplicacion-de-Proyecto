@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pollerya Manager - Configuración</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f6f9; }
+        .bg-sidebar { background-color: #111e38; }
+        .bg-active-menu { background-color: #4a3e2e; color: #f4ca74; }
+        .menu-item:hover { background-color: rgba(255, 255, 255, 0.05); color: #ffffff; }
+        .card-shadow { box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-[#eef1f6]">
+    <aside class="w-64 bg-sidebar flex flex-col h-full text-gray-400 select-none px-4 py-6 shadow-xl shrink-0">
+        <div class="flex items-center gap-3 px-2 mb-8">
+            <div class="text-[#f4ca74] text-3xl"><i class="fa-solid fa-kiwi-bird rotate-180"></i></div>
+            <div class="flex flex-col">
+                <span class="text-white font-bold tracking-wide text-base uppercase">POLLERYA</span>
+                <span class="text-gray-400 text-xs font-medium -mt-1">Manager</span>
+            </div>
+        </div>
+        <nav id="sidebar-nav" class="flex-1 space-y-1.5">
+            <a href="index.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-house text-lg w-5 text-center"></i> <span>Inicio</span>
+            </a>
+            <a href="personal.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-users text-lg w-5 text-center"></i> <span>Personal</span>
+            </a>
+            <a href="cocina.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-utensils text-lg w-5 text-center"></i> <span>Cocina</span>
+            </a>
+            <a href="inventario.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-box-open text-lg w-5 text-center"></i> <span>Inventario</span>
+            </a>
+            <a href="equipos.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-screwdriver-wrench text-lg w-5 text-center"></i> <span>Equipos</span>
+            </a>
+            <a href="reportes.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-chart-line text-lg w-5 text-center"></i> <span>Reportes</span>
+            </a>
+            <a href="menu.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-book-open text-lg w-5 text-center"></i> <span>Menú Tienda</span>
+            </a>
+            <a href="configuracion.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-gear text-lg w-5 text-center"></i> <span>Configuración</span>
+            </a>
+        </nav>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full overflow-y-auto">
+        <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center shrink-0">
+            <h1 class="text-xl font-bold text-gray-800 tracking-tight">Parámetros del Sistema</h1>
+            <button onclick="guardarConfiguracionForm()" class="bg-blue-600 text-white px-6 py-2 rounded-lg text-xs font-bold hover:bg-blue-700 transition-colors shadow-md">
+                Guardar Cambios
+            </button>
+        </header>
+
+        <main class="p-8 max-w-4xl">
+            <div class="grid grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <section class="bg-white p-6 rounded-xl border border-gray-200">
+                        <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Información Legal</h2>
+                        <div class="space-y-4">
+                            <div><label class="text-[11px] font-bold text-gray-600 block mb-1">Nombre Comercial</label><input type="text" id="cfg-nombre-local" class="w-full px-3 py-2 bg-gray-50 border rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-500 outline-none"></div>
+                            <div><label class="text-[11px] font-bold text-gray-600 block mb-1">Cédula Jurídica</label><input type="text" id="cfg-cedula-fiscal" class="w-full px-3 py-2 bg-gray-50 border rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-500 outline-none"></div>
+                            <div><label class="text-[11px] font-bold text-gray-600 block mb-1">Impuesto de Ventas (IVA %)</label><input type="number" id="cfg-impuesto" class="w-full px-3 py-2 bg-gray-50 border rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-500 outline-none"></div>
+                        </div>
+                    </section>
+
+                    <section class="bg-white p-6 rounded-xl border border-gray-200">
+                        <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Seguridad</h2>
+                        <div class="relative">
+                            <label class="text-[11px] font-bold text-gray-600 block mb-1">PIN Gerencial de Acceso</label>
+                            <input type="password" id="cfg-pin-seguridad" maxlength="4" class="w-full px-3 py-2 bg-gray-50 border rounded-lg text-sm font-bold tracking-widest focus:ring-2 focus:ring-blue-500 outline-none">
+                            <button onclick="togglePinVisibilidad()" class="absolute right-3 bottom-2 text-gray-400 hover:text-gray-600"><i id="pin-eye-icon" class="fa-solid fa-eye"></i></button>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="space-y-6">
+                    <section class="bg-white p-6 rounded-xl border border-gray-200">
+                        <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Tiempos y Tolerancias</h2>
+                        <div class="space-y-4">
+                            <div><label class="text-[11px] font-bold text-gray-600 block mb-1">Límite Espera Cocina (min)</label><input type="number" id="cfg-limite-espera" class="w-full px-3 py-2 bg-gray-50 border rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-500 outline-none"></div>
+                            <div><label class="text-[11px] font-bold text-gray-600 block mb-1">Tolerancia de Retraso Personal (min)</label><input type="number" id="cfg-tolerancia-retraso" class="w-full px-3 py-2 bg-gray-50 border rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-500 outline-none"></div>
+                        </div>
+                    </section>
+
+                    <section class="bg-white p-6 rounded-xl border border-gray-200">
+                        <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Hardware</h2>
+                        <div>
+                            <label class="text-[11px] font-bold text-gray-600 block mb-1">Impresora de Comandas Activa</label>
+                            <select id="cfg-impresora" class="w-full px-3 py-2 bg-gray-50 border rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-500 outline-none">
+                                <option value="boca-cocina">Boca Cocina - Térmica 80mm</option>
+                                <option value="barra-servicio">Barra Servicio - Térmica 58mm</option>
+                                <option value="oficina-central">Oficina - Inyección Tinta</option>
+                            </select>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+    <script src="configuracion.js"></script>
+</body>
+</html>

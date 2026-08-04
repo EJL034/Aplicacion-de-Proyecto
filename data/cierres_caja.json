@@ -1,0 +1,23 @@
+[
+  {
+    "id": "cierre-1785608180027-138",
+    "ventasTotales": 23900,
+    "ordenesProcesadas": 3,
+    "fecha": "2026-08-01T18:16:20.025Z",
+    "detalleCanales": {
+      "mostrador": {
+        "monto": 12500,
+        "porcentaje": 52
+      },
+      "express": {
+        "monto": 3800,
+        "porcentaje": 16
+      },
+      "auto": {
+        "monto": 7600,
+        "porcentaje": 32
+      }
+    },
+    "estado": "completado"
+  }
+]

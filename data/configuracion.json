@@ -1,0 +1,12 @@
+[
+  {
+    "id": "config-general",
+    "nombreLocal": "Pollerya Central Costa Rica",
+    "cedulaJuridica": "3-101-758492",
+    "ivaPorcentaje": 13,
+    "limiteEsperaCocina": 10,
+    "toleranciaRetrasoPersonal": 15,
+    "pinGerencialHash": "ed946f65d2c785d90e827c5ffd879ce3b49c68d4c88013074176a7e73bc58bcf",
+    "impresoraActiva": "boca-cocina"
+  }
+]

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pollerya Manager - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f6f9; }
+        .bg-sidebar { background-color: #111e38; }
+        .bg-active-menu { background-color: #4a3e2e; color: #f4ca74; }
+        .menu-item:hover { background-color: rgba(255, 255, 255, 0.05); color: #ffffff; }
+        .card-shadow { box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .fade-out { opacity: 0; pointer-events: none; transition: opacity 0.4s ease-out, transform 0.4s ease-out; transform: scale(1.03); }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-[#eef1f6] relative">
+
+    <div id="pin-overlay" class="absolute inset-0 z-50 bg-[#111e38] flex flex-col items-center justify-center p-4 transition-all duration-300">
+        <div class="text-center mb-6 select-none">
+            <div class="text-[#f4ca74] text-5xl mb-2 flex justify-center"><i class="fa-solid fa-kiwi-bird rotate-180"></i></div>
+            <h1 class="text-white text-3xl font-bold tracking-wide uppercase">BIENVENIDO AL SISTEMA</h1>
+            <p class="text-gray-400 text-sm mt-1">inserte el pin</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-sm border border-gray-100">
+            <div class="flex justify-center gap-3 mb-5">
+                <div class="pin-dot w-12 h-12 border-2 border-gray-300 rounded-xl flex items-center justify-center text-xl font-bold text-[#111e38] bg-gray-50"></div>
+                <div class="pin-dot w-12 h-12 border-2 border-gray-300 rounded-xl flex items-center justify-center text-xl font-bold text-[#111e38] bg-gray-50"></div>
+                <div class="pin-dot w-12 h-12 border-2 border-gray-300 rounded-xl flex items-center justify-center text-xl font-bold text-[#111e38] bg-gray-50"></div>
+                <div class="pin-dot w-12 h-12 border-2 border-gray-300 rounded-xl flex items-center justify-center text-xl font-bold text-[#111e38] bg-gray-50"></div>
+            </div>
+
+            <p id="pin-message" class="text-center text-xs font-semibold mb-4 text-gray-400">Esperando PIN de seguridad</p>
+
+            <div class="grid grid-cols-3 gap-3 mb-4">
+                <button onclick="pressKey('1')" class="h-14 bg-gray-50 hover:bg-gray-100 text-lg font-semibold rounded-xl border border-gray-200 transition-colors active:bg-gray-200 text-gray-800">1</button>
+                <button onclick="pressKey('2')" class="h-14 bg-gray-50 hover:bg-gray-100 text-lg font-semibold rounded-xl border border-gray-200 transition-colors active:bg-gray-200 text-gray-800">2</button>
+                <button onclick="pressKey('3')" class="h-14 bg-gray-50 hover:bg-gray-100 text-lg font-semibold rounded-xl border border-gray-200 transition-colors active:bg-gray-200 text-gray-800">3</button>
+                
+                <button onclick="pressKey('4')" class="h-14 bg-gray-50 hover:bg-gray-100 text-lg font-semibold rounded-xl border border-gray-200 transition-colors active:bg-gray-200 text-gray-800">4</button>
+                <button onclick="pressKey('5')" class="h-14 bg-gray-50 hover:bg-gray-100 text-lg font-semibold rounded-xl border border-gray-200 transition-colors active:bg-gray-200 text-gray-800">5</button>
+                <button onclick="pressKey('6')" class="h-14 bg-gray-50 hover:bg-gray-100 text-lg font-semibold rounded-xl border border-gray-200 transition-colors active:bg-gray-200 text-gray-800">6</button>
+                
+                <button onclick="pressKey('7')" class="h-14 bg-gray-50 hover:bg-gray-100 text-lg font-semibold rounded-xl border border-gray-200 transition-colors active:bg-gray-200 text-gray-800">7</button>
+                <button onclick="pressKey('8')" class="h-14 bg-gray-50 hover:bg-gray-100 text-lg font-semibold rounded-xl border border-gray-200 transition-colors active:bg-gray-200 text-gray-800">8</button>
+                <button onclick="pressKey('9')" class="h-14 bg-gray-50 hover:bg-gray-100 text-lg font-semibold rounded-xl border border-gray-200 transition-colors active:bg-gray-200 text-gray-800">9</button>
+                
+                <button onclick="clearPin()" class="h-14 bg-red-50 hover:bg-red-100 text-red-600 font-bold rounded-xl border border-red-200 transition-colors">C</button>
+                <button onclick="pressKey('0')" class="h-14 bg-gray-50 hover:bg-gray-100 text-lg font-semibold rounded-xl border border-gray-200 transition-colors active:bg-gray-200 text-gray-800">0</button>
+                <button onclick="validatePin()" class="h-14 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-colors shadow-md">Ok</button>
+            </div>
+
+            <button onclick="openChangePinModal()" class="w-full py-2.5 text-xs font-semibold text-gray-500 hover:text-blue-600 transition-colors flex items-center justify-center gap-2 border border-dashed border-gray-300 rounded-xl hover:border-blue-400">
+                <i class="fa-solid fa-key"></i> Cambiar PIN de Acceso
+            </button>
+        </div>
+    </div>
+
+    <div id="change-pin-modal" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-2xl w-full max-w-xs shadow-2xl">
+            <h3 class="text-base font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-blue-600"></i> Actualizar PIN
+            </h3>
+            <div class="space-y-3">
+                <div>
+                    <label class="text-xs font-medium text-gray-600 block mb-1">PIN Actual</label>
+                    <input type="password" id="input-old-pin" maxlength="4" placeholder="••••" class="w-full px-3 py-2 border rounded-xl text-center font-bold tracking-widest focus:outline-none focus:ring-2 focus:ring-[#111e38]">
+                </div>
+                <div>
+                    <label class="text-xs font-medium text-gray-600 block mb-1">Nuevo PIN (4 dígitos)</label>
+                    <input type="password" id="input-new-pin" maxlength="4" placeholder="••••" class="w-full px-3 py-2 border rounded-xl text-center font-bold tracking-widest focus:outline-none focus:ring-2 focus:ring-[#111e38]">
+                </div>
+            </div>
+            <div class="flex gap-2 mt-5">
+                <button onclick="closeChangePinModal()" class="flex-1 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold text-xs rounded-xl transition-colors">Cancelar</button>
+                <button onclick="saveNewPin()" class="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl transition-colors shadow-md">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIDEBAR LATERAL UNIFICADO -->
+    <aside class="w-64 bg-sidebar flex flex-col h-full text-gray-400 select-none px-4 py-6 shadow-xl shrink-0">
+        <div class="flex items-center gap-3 px-2 mb-8">
+            <div class="text-[#f4ca74] text-3xl"><i class="fa-solid fa-kiwi-bird rotate-180"></i></div>
+            <div class="flex flex-col">
+                <span class="text-white font-bold tracking-wide text-base uppercase">POLLERYA</span>
+                <span class="text-gray-400 text-xs font-medium -mt-1">Manager</span>
+            </div>
+        </div>
+
+        <nav id="sidebar-nav" class="flex-1 space-y-1.5">
+            <a href="index.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-house text-lg w-5 text-center"></i> <span>Inicio</span>
+            </a>
+            <a href="personal.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-users text-lg w-5 text-center"></i> <span>Personal</span>
+            </a>
+            <a href="cocina.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-utensils text-lg w-5 text-center"></i> <span>Cocina</span>
+            </a>
+            <a href="inventario.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-box-open text-lg w-5 text-center"></i> <span>Inventario</span>
+            </a>
+            <a href="equipos.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-screwdriver-wrench text-lg w-5 text-center"></i> <span>Equipos</span>
+            </a>
+            <a href="reportes.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-chart-line text-lg w-5 text-center"></i> <span>Reportes</span>
+            </a>
+            <a href="menu.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-book-open text-lg w-5 text-center"></i> <span>Menú Tienda</span>
+            </a>
+            <a href="configuracion.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all">
+                <i class="fa-solid fa-gear text-lg w-5 text-center"></i> <span>Configuración</span>
+            </a>
+        </nav>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full overflow-y-auto">
+        
+        <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center shrink-0">
+            <h1 class="text-xl font-bold text-gray-800 tracking-tight">Restaurante Central</h1>
+            <div class="flex items-center gap-4 text-gray-500">
+                <button id="btn-mensajes" class="hover:text-gray-700 relative">
+                    <i class="fa-regular fa-comments text-lg"></i>
+                </button>
+                <button id="btn-notificaciones" class="hover:text-gray-700 relative">
+                    <i class="fa-regular fa-bell text-lg"></i>
+                    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+                <div id="btn-perfil" class="flex items-center gap-2 border-l pl-4 cursor-pointer hover:opacity-80">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" alt="Avatar" class="w-8 h-8 rounded-full border object-cover">
+                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="px-8 pt-6 pb-2 flex justify-between items-end shrink-0">
+            <h2 class="text-2xl font-bold text-gray-800">Dashboard General</h2>
+            <p class="text-sm text-gray-600 font-medium" id="info-encabezado">Cargando...</p>
+        </div>
+
+        <main class="p-8 pt-2 space-y-6 flex-1">
+            <div>
+                <p class="text-sm font-bold text-gray-700 mb-2">Tarjetas de Estado</p>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="bg-white p-4 rounded-xl card-shadow border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-bold text-black">Personal Activo</h3>
+                            <p class="text-gray-500 text-xs mt-0.5" id="txt-personal-activo">(11/15)</p>
+                        </div>
+                        <a href="personal.html" class="text-blue-600 font-bold text-xs mt-4 block hover:underline">[Ver más]</a>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl card-shadow border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-bold text-black">Pedidos en Cocina</h3>
+                            <p class="text-gray-500 text-xs mt-0.5" id="txt-pedidos-cocina">(0 Pendientes)</p>
+                        </div>
+                        <a href="cocina.html" class="text-blue-600 font-bold text-xs mt-4 block hover:underline">[Monitor]</a>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl card-shadow border border-gray-100 flex flex-col justify-between" id="card-inventario">
+                        <div>
+                            <h3 class="text-sm font-bold text-black">Inventario Crítico</h3>
+                            <p class="text-gray-500 text-xs mt-0.5" id="txt-inventario-critico">(4 Ítems bajos)</p>
+                        </div>
+                        <a href="inventario.html" id="lnk-revisar-inventario" class="text-blue-600 font-bold text-xs mt-4 block hover:underline">[Revisar]</a>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl card-shadow border border-gray-100 flex flex-col justify-between" id="card-mantenimiento">
+                        <div>
+                            <h3 class="text-sm font-bold text-black">Mantenimiento Equipos</h3>
+                            <p class="text-gray-500 text-xs mt-0.5" id="txt-mantenimiento-alertas">(1 Alerta)</p>
+                        </div>
+                        <a href="equipos.html" id="lnk-detalles-mantenimiento" class="text-blue-600 font-bold text-xs mt-4 block hover:underline">[Detalles]</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-2 space-y-6">
+                    <div class="bg-white p-5 rounded-xl card-shadow border border-gray-100">
+                        <h3 class="text-sm font-bold text-black mb-1">Monitor de Cocina En Tiempo Real</h3>
+                        <p class="text-xs font-bold text-gray-700 mb-4">Pedidos Actuales</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="text-xs font-bold text-gray-500 border-b border-gray-100 pb-2">
+                                        <th class="pb-2 w-24">Order #</th>
+                                        <th class="pb-2">Items</th>
+                                        <th class="pb-2 w-32">Time Elapsed</th>
+                                        <th class="pb-2 w-20 text-center">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-pedidos" class="text-xs font-medium text-gray-800 divide-y divide-gray-50"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl card-shadow border border-gray-100">
+                        <h3 class="text-sm font-bold text-black mb-4">Control de Inventario de Pollo</h3>
+                        <div class="grid grid-cols-4 gap-2 text-center border-b border-gray-100 pb-4 mb-4">
+                            <div>
+                                <p class="text-[11px] font-bold text-gray-700 leading-tight">Stock Actual</p>
+                                <p class="text-lg font-bold text-gray-800 mt-1" id="lbl-stock-actual">0</p>
+                            </div>
+                            <div>
+                                <p class="text-[11px] font-bold text-gray-700 leading-tight">Consumo Hoy</p>
+                                <p class="text-lg font-bold text-gray-800 mt-1" id="lbl-consumo-hoy">0</p>
+                            </div>
+                            <div>
+                                <p class="text-[11px] font-bold text-gray-700 leading-tight">Predicción</p>
+                                <p class="text-lg font-bold text-gray-800 mt-1" id="lbl-prediccion">--</p>
+                            </div>
+                            <div>
+                                <p class="text-[11px] font-bold text-gray-700 leading-tight">Alerta Pedido</p>
+                                <p class="text-lg font-bold text-gray-800 mt-1" id="lbl-alerta">--</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white p-5 rounded-xl card-shadow border border-gray-100">
+                        <h3 class="text-sm font-bold text-black mb-4">Mantenimiento Preventivo IoT</h3>
+                        <div id="lista-equipos-iot" class="space-y-4"></div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-xl card-shadow border border-gray-100">
+                        <h3 class="text-sm font-bold text-black mb-1">Asistencia Personal (Turno Tarde)</h3>
+                        <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-100 mt-4">
+                            <span class="text-xs font-bold text-gray-700">Presentes</span>
+                            <span class="text-sm font-bold text-black" id="txt-asistencia-conteo">0 / 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+    <script src="javascript.js"></script>
+    <script>
+        // Verificar si la sesión ya fue autorizada previamente en esta pestaña
+        if (sessionStorage.getItem('pollerya_sesion_activa') === "true") {
+            document.getElementById('pin-overlay').remove();
+        }
+
+        let currentPinInput = "";
+        function pressKey(num) { if (currentPinInput.length < 4) { currentPinInput += num; updatePinDisplay(); } }
+        function clearPin() { currentPinInput = ""; updatePinDisplay(); document.getElementById('pin-message').innerText = "Esperando PIN de seguridad"; }
+        function updatePinDisplay() {
+            const dots = document.querySelectorAll('.pin-dot');
+            dots.forEach((dot, idx) => dot.innerText = idx < currentPinInput.length ? "•" : "");
+        }
+
+        // El PIN ya NO se compara contra localStorage: se verifica contra el hash
+        // guardado en el servidor (ver /api/configuracion/verificar-pin en db.js).
+        async function validatePin() {
+            try {
+                const respuesta = await fetch('/api/configuracion/verificar-pin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pin: currentPinInput })
+                });
+                const datos = await respuesta.json();
+
+                if (datos.autorizado) {
+                    sessionStorage.setItem('pollerya_sesion_activa', "true");
+                    document.getElementById('pin-overlay').classList.add('fade-out');
+                    setTimeout(() => document.getElementById('pin-overlay').remove(), 400);
+                } else {
+                    alert("PIN Incorrecto"); clearPin();
+                }
+            } catch (error) {
+                console.error('No se pudo verificar el PIN con el servidor:', error);
+                alert("No se pudo conectar con el servidor para validar el PIN.");
+            }
+        }
+
+        function openChangePinModal() { document.getElementById('change-pin-modal').classList.remove('hidden'); }
+        function closeChangePinModal() { document.getElementById('change-pin-modal').classList.add('hidden'); }
+
+        async function saveNewPin() {
+            const oldPinInput = document.getElementById('input-old-pin').value;
+            const newPinInput = document.getElementById('input-new-pin').value;
+
+            if (newPinInput.length !== 4 || isNaN(newPinInput)) {
+                return alert("El nuevo PIN debe ser de 4 dígitos numéricos");
+            }
+
+            try {
+                const verificacion = await fetch('/api/configuracion/verificar-pin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pin: oldPinInput })
+                });
+                const resultadoVerificacion = await verificacion.json();
+                if (!resultadoVerificacion.autorizado) {
+                    return alert("PIN actual incorrecto");
+                }
+
+                await fetch('/api/configuracion', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pin: newPinInput })
+                });
+
+                alert("¡PIN Modificado!"); closeChangePinModal(); clearPin();
+            } catch (error) {
+                console.error('No se pudo actualizar el PIN:', error);
+                alert("No se pudo conectar con el servidor para actualizar el PIN.");
+            }
+        }
+    </script>
+</body>
+</html>

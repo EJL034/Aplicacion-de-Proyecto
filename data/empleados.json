@@ -1,0 +1,56 @@
+[
+  {
+    "id_personal": 1,
+    "nombre": "Emanuel López",
+    "puesto": "Administrador General",
+    "turno": "Tarde",
+    "salarioBruto": 650000,
+    "faltas": 0,
+    "estado": "Fuera de turno"
+  },
+  {
+    "id_personal": 2,
+    "nombre": "Valeria Chaves",
+    "puesto": "Jefa de Cocina",
+    "turno": "Tarde",
+    "salarioBruto": 480000,
+    "faltas": 1,
+    "estado": "Fuera de turno"
+  },
+  {
+    "id_personal": 3,
+    "nombre": "Anthony Grant",
+    "puesto": "Encargado de Caja",
+    "turno": "Tarde",
+    "salarioBruto": 420000,
+    "faltas": 2,
+    "estado": "Presente"
+  },
+  {
+    "id_personal": 4,
+    "nombre": "María Rojas",
+    "puesto": "Cajera",
+    "turno": "Tarde",
+    "salarioBruto": 380000,
+    "faltas": 0,
+    "estado": "Presente"
+  },
+  {
+    "id_personal": 5,
+    "nombre": "Andrés Chaves",
+    "puesto": "Cocinero Principal",
+    "turno": "Tarde",
+    "salarioBruto": 430000,
+    "faltas": 0,
+    "estado": "Presente"
+  },
+  {
+    "id_personal": 6,
+    "nombre": "Carlos Solano",
+    "puesto": "Ayudante de Cocina",
+    "turno": "Tarde",
+    "salarioBruto": 360000,
+    "faltas": 0,
+    "estado": "Fuera de turno"
+  }
+]
