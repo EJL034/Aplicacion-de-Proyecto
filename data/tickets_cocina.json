@@ -1,21 +1,12 @@
 [
   {
-    "id": "437",
-    "items": [
-      "1x Pollo Crispy Personal",
-      "1x Refresco"
-    ],
-    "tiempo": 2,
-    "estado": "listo"
-  },
-  {
     "id": "180",
     "items": [
       "1x Pollo Familiar",
       "1x Extra Salsa"
     ],
     "tiempo": 2,
-    "estado": "proceso"
+    "estado": "listo"
   },
   {
     "id": "931",
@@ -27,22 +18,13 @@
     "estado": "proceso"
   },
   {
-    "id": "394",
-    "items": [
-      "1x Pollo Crispy Personal",
-      "1x Refresco"
-    ],
-    "tiempo": 1,
-    "estado": "listo"
-  },
-  {
     "id": "847",
     "items": [
       "1x Pollo Crispy Personal",
       "1x Refresco"
     ],
     "tiempo": 4,
-    "estado": "proceso"
+    "estado": "listo"
   },
   {
     "id": "131",
@@ -58,6 +40,15 @@
     "items": [
       "2x Pollo Grande (Frito)",
       "1x Porción Patacones"
+    ],
+    "tiempo": 4,
+    "estado": "espera"
+  },
+  {
+    "id": "957",
+    "items": [
+      "1x Pollo Familiar",
+      "1x Extra Salsa"
     ],
     "tiempo": 4,
     "estado": "espera"

@@ -82,5 +82,26 @@
       }
     },
     "estado": "completado"
+  },
+  {
+    "id": "cierre-1785881661719-736",
+    "ventasTotales": 103554,
+    "ordenesProcesadas": 12,
+    "fecha": "2026-08-04T22:14:21.717Z",
+    "detalleCanales": {
+      "mostrador": {
+        "monto": 30674,
+        "porcentaje": 30
+      },
+      "express": {
+        "monto": 45615,
+        "porcentaje": 44
+      },
+      "auto": {
+        "monto": 27265,
+        "porcentaje": 26
+      }
+    },
+    "estado": "completado"
   }
 ]

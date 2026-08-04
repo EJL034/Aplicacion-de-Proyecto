@@ -89,6 +89,27 @@ describe('Rutas de Inventario', () => {
 
       expect(res.body).toEqual([]);
     });
+
+    it('debe normalizar correctamente un insumo que solo tiene stock_actual', () => {
+      const insumosFake = [
+        {
+          id: 'inv-99',
+          nombre: 'Solo stock_actual',
+          stock_actual: 8,
+          minimo: 20,
+          // sin campo "actual"
+        }
+      ];
+      db.leerColeccion.mockReturnValue(insumosFake);
+
+      const { req, res } = crearMockReqRes();
+      const handler = router.stack.find(r => r.route?.path === '/' && r.route.methods.get).route.stack[0].handle;
+      handler(req, res);
+
+      expect(res.body[0].actual).toBe(8);
+      expect(res.body[0].stock_actual).toBe(8);
+      expect(res.body[0].estado).toBe('critico');
+    });
   });
 
   // ------------------------------------------------------------------
@@ -124,6 +145,25 @@ describe('Rutas de Inventario', () => {
       expect(ioMock.emit).toHaveBeenCalledWith('cambio_inventario', expect.objectContaining({
         tipo: 'nuevo'
       }));
+    });
+
+    it('debe usar valores por defecto si no se envía categoria ni unidad', () => {
+      db.leerColeccion.mockReturnValue([]);
+      db.generarId.mockReturnValue('inv-def');
+
+      const { req, res } = crearMockReqRes({
+        nombre: 'Producto sin extras',
+        actual: 20,
+        minimo: 10
+        // sin categoria ni unidad
+      });
+
+      const handler = router.stack.find(r => r.route?.path === '/' && r.route.methods.post).route.stack[0].handle;
+      handler(req, res);
+
+      expect(res.statusCode).toBe(200);
+      expect(res.body.insumo.categoria).toBe('Sin categoría');
+      expect(res.body.insumo.unidad).toBe('unds');
     });
 
     it('debe rechazar si faltan campos obligatorios', () => {
@@ -223,6 +263,34 @@ describe('Rutas de Inventario', () => {
       handler(req, res);
 
       expect(res.body.insumo.actual).toBe(0); // Math.max(0, ...)
+    });
+
+    it('debe tratar cantidad undefined como 0', () => {
+      const insumos = [
+        { id: 'inv-01', nombre: 'Pollo', actual: 10, minimo: 5, unidad: 'unds', consumidoHoy: 0 }
+      ];
+      db.leerColeccion.mockReturnValue(insumos);
+
+      const { req, res } = crearMockReqRes({}, { id: 'inv-01' }); // sin cantidad
+
+      const handler = router.stack.find(r => r.route?.path === '/:id/consumir' && r.route.methods.post).route.stack[0].handle;
+      handler(req, res);
+
+      expect(res.statusCode).toBe(200);
+      expect(res.body.insumo.actual).toBe(10); // no cambió
+      expect(res.body.insumo.consumidoHoy).toBe(0);
+    });
+
+    it('debe devolver 404 al consumir un insumo inexistente', () => {
+      db.leerColeccion.mockReturnValue([]);
+
+      const { req, res } = crearMockReqRes({ cantidad: 2 }, { id: 'no-existe' });
+
+      const handler = router.stack.find(r => r.route?.path === '/:id/consumir' && r.route.methods.post).route.stack[0].handle;
+      handler(req, res);
+
+      expect(res.statusCode).toBe(404);
+      expect(res.body.status).toBe('error');
     });
   });
 });

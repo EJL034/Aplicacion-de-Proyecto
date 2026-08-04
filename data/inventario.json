@@ -3,12 +3,12 @@
     "id": "inv-01",
     "nombre": "Pollo Entero Limpio",
     "categoria": "Carnes y Proteínas",
-    "actual": 7,
+    "actual": 5,
     "minimo": 30,
     "unidad": "unds",
     "estado": "critico",
-    "consumidoHoy": 8,
-    "stock_actual": 7
+    "consumidoHoy": 10,
+    "stock_actual": 5
   },
   {
     "id": "inv-02",

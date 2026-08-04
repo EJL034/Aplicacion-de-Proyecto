@@ -131,6 +131,15 @@ describe('Rutas de Personal', () => {
       expect(ioMock.emit).toHaveBeenCalledWith('cambio_personal', expect.objectContaining({ tipo: 'eliminado' }));
     });
 
+    it('debe rechazar si no se envía id_personal', () => {
+      const { req, res } = crearMockReqRes({}); // sin id_personal
+      obtenerHandler(router, '/', 'delete')(req, res);
+
+      expect(res.statusCode).toBe(400);
+      expect(res.body.status).toBe('error');
+      expect(res.body.error).toMatch(/id_personal/i);
+    });
+
     it('debe devolver 404 si no existe', () => {
       db.leerColeccion.mockReturnValue([]);
       const { req, res } = crearMockReqRes({ id_personal: 99 });
@@ -190,6 +199,38 @@ describe('Rutas de Personal', () => {
       expect(res.statusCode).toBe(200);
       expect(res.body.empleado.faltas).toBe(2);
       expect(res.body.empleado.estado).toBe('Falta');
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // GET /asistencia
+  // ------------------------------------------------------------------
+  describe('GET /api/personal/asistencia', () => {
+    it('debe devolver todos los registros si no se envía mes', () => {
+      const registros = [
+        { id: 'asis-1', id_personal: 1, fecha: '2026-07-15', tipo: 'entrada' },
+        { id: 'asis-2', id_personal: 2, fecha: '2026-08-01', tipo: 'falta' }
+      ];
+      db.leerColeccion.mockReturnValue(registros);
+
+      const { req, res } = crearMockReqRes({}, {}, {}); // query vacío
+      obtenerHandler(router, '/asistencia', 'get')(req, res);
+
+      expect(res.body).toHaveLength(2);
+    });
+
+    it('debe filtrar por mes cuando se envía ?mes=', () => {
+      const registros = [
+        { id: 'asis-1', id_personal: 1, fecha: '2026-07-15', tipo: 'entrada' },
+        { id: 'asis-2', id_personal: 2, fecha: '2026-08-01', tipo: 'falta' }
+      ];
+      db.leerColeccion.mockReturnValue(registros);
+
+      const { req, res } = crearMockReqRes({}, {}, { mes: '2026-07' });
+      obtenerHandler(router, '/asistencia', 'get')(req, res);
+
+      expect(res.body).toHaveLength(1);
+      expect(res.body[0].fecha).toBe('2026-07-15');
     });
   });
 

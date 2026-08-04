@@ -65,6 +65,14 @@ describe('Rutas de Cocina', () => {
       });
     });
 
+    it('debe rechazar si falta idOrden', () => {
+      const { req, res } = crearMockReqRes({ estado: 'proceso' }); // sin idOrden
+      obtenerHandler(router, '/actualizar', 'post')(req, res);
+
+      expect(res.statusCode).toBe(400);
+      expect(res.body.status).toBe('error');
+    });
+
     it('debe rechazar si faltan datos', () => {
       const { req, res } = crearMockReqRes({ idOrden: '105' });
       obtenerHandler(router, '/actualizar', 'post')(req, res);
